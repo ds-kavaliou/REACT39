@@ -1,3 +1,4 @@
+import Users from "./features/users/Users";
 import Form from "./Form";
 
 export default function App() {
@@ -5,6 +6,7 @@ export default function App() {
     <main>
       <div className="container">
         <Form />
+        <Users />
       </div>
     </main>
   );
