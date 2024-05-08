@@ -1,3 +1,11 @@
+import Form from "./Form";
+
 export default function App() {
-  return <div>it works</div>;
+  return (
+    <main>
+      <div className="container">
+        <Form />
+      </div>
+    </main>
+  );
 }
