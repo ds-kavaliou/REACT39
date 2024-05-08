@@ -1,10 +1,12 @@
-import { Component } from "react";
+import { Component, createRef } from "react";
 
 export default class Form extends Component {
   static getDerivedStateFromError({ message }) {
     console.log("getDerivedStateFromError");
     return { error: message };
   }
+
+  inputRef = createRef();
 
   state = {
     term: "",
@@ -42,29 +44,37 @@ export default class Form extends Component {
     console.log("componentWillUnmount");
   }
 
-  handle = (e) => {
+  handleChange = (e) => {
     this.setState({ term: e.target.value });
+  };
+
+  handleFocus = () => {
+    this.inputRef.current.focus();
   };
 
   render() {
     console.log("render");
+
+    const disabled = this.state.term === "реакт";
+
     return (
       <form>
         <div>
           <input
             type="text"
             placeholder="Search..."
+            ref={this.inputRef}
             value={this.state.term}
-            onChange={this.handle}
+            onChange={this.handleChange}
           />
         </div>
-        <button type="submit">submit</button>
-        <List term={this.state.term} />
+        <button type="submit" disabled={disabled}>
+          submit
+        </button>
+        <button type="button" onClick={this.handleFocus}>
+          focus
+        </button>
       </form>
     );
   }
-}
-
-function List({ term }) {
-  return <div>{term}</div>;
 }
